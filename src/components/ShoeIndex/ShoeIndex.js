@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 
-import { WEIGHTS } from '../../constants';
+import { QUERIES, WEIGHTS } from '../../constants';
 
 import Breadcrumbs from '../Breadcrumbs';
 import Select from '../Select';
@@ -14,7 +14,20 @@ const ShoeIndex = ({ sortId, setSortId }) => {
     <Wrapper>
       <MainColumn>
         <Header>
-          <Title>Running</Title>
+        <SmallScreenTitle>
+        <BreadCrumbWrapper>
+        <Breadcrumbs>
+          <Breadcrumbs.Crumb href="/">Home</Breadcrumbs.Crumb>
+          <Breadcrumbs.Crumb href="/sale">Sale</Breadcrumbs.Crumb>
+          <Breadcrumbs.Crumb href="/sale/shoes">
+            Shoes
+          </Breadcrumbs.Crumb>
+        </Breadcrumbs>
+        </BreadCrumbWrapper>
+
+        <Title>Running</Title>
+        </SmallScreenTitle>
+
           <Select
             label="Sort"
             value={sortId}
@@ -49,8 +62,30 @@ const Wrapper = styled.div`
   gap: 32px;
 `;
 
+const SmallScreenTitle = styled.div`
+  @media ${QUERIES.tabletMax}{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+`;
+
+const BreadCrumbWrapper = styled.div`
+  display: none;
+
+  @media ${QUERIES.tabletMax}{
+    display: block;
+  }
+
+`;
+
 const LeftColumn = styled.div`
   flex-basis: 248px;
+
+  @media ${QUERIES.tabletMax}{
+    display: none;
+  }
 `;
 
 const MainColumn = styled.div`
@@ -61,6 +96,10 @@ const Header = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: baseline;
+
+  @media ${QUERIES.tabletMax}{
+    align-items: flex-end;
+  }
 `;
 
 const Title = styled.h2`
